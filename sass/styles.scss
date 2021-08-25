@@ -1,0 +1,40 @@
+
+@use "mixins";
+@use "variables";
+
+
+
+
+
+@for $i from 1 through 10 {
+  .col-#{$i} {
+    width: 10% * $i;
+  }
+}
+
+
+
+@each $i in variables.$flexDirection {
+  .flex-#{nth($i, 1)} {
+    flex-direction: #{nth($i, 1)};
+    @include mixins.centerFlexElement;
+  }
+}
+
+
+@each $i in variables.$breakpoints {
+  @media (min-width: #{nth($i, 2)}) {
+    @each $j in variables.$flexDirection {
+      .flex#{nth($i, 1)}#{nth($j, 1)} {
+        @include mixins.centerFlexElement;
+        flex-direction: #{nth($j, 1)};
+      }
+    }
+
+    @for $j from 1 through 10 {
+      .col#{nth($i, 1)}#{$j} {
+        width: 10% * $j;
+      }
+    }
+  }
+}
