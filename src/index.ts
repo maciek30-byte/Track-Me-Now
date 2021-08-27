@@ -1,7 +1,13 @@
 import '/sass/styles.scss'
+
+import mapboxgl from 'mapbox-gl';
+
+console.log('this is map library', mapboxgl)
+
+
 import {makeLogger} from 'ts-loader/dist/logger';
 const startTrackingButton:HTMLButtonElement = document.querySelector('.start-button')
-const map:HTMLElement = document.querySelector('.map-container');
+const mapContainer:HTMLElement = document.querySelector('.map-container');
 const stopTrackingButton:HTMLButtonElement = document.querySelector('.stop-button')
 
 
@@ -32,4 +38,14 @@ stopTrackingButton.addEventListener('click', ()=>{
     window.localStorage.clear()
 })
 
+// map object//
+
+
+mapboxgl.accessToken = 'pk.eyJ1IjoibWFjaWVrMzAtYnl0ZSIsImEiOiJja3N1MmI3MzAwNHlqMndxYzVnM29manI4In0.7SlqbceGVBl8Vm29i7hcJA';
+const map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: [-74.5, 40], // starting position [lng, lat]
+    zoom: 9 // starting zoom
+});
 
