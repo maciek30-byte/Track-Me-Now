@@ -49,3 +49,57 @@ const map = new mapboxgl.Map({
     zoom: 9 // starting zoom
 });
 
+map.on('load', () => {
+    map.addSource('route', {
+        'type': 'geojson',
+        'data': {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+                'type': 'LineString',
+                'coordinates': savedCordinates
+            }
+        }
+    });
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#888',
+            'line-width': 8
+        }
+    });
+});
+
+
+// Create a default Marker and add it to the map.
+const marker1 = new mapboxgl.Marker()
+    .setLngLat([12.554729, 55.70651])
+    .addTo(map);
+
+// Create a default Marker, colored black, rotated 45 degrees.
+const marker2 = new mapboxgl.Marker({ color: 'black', rotation: 45 })
+    .setLngLat([12.65147, 55.608166])
+    .addTo(map)
+
+// Add zoom and rotation controls to the map.
+map.addControl(new mapboxgl.NavigationControl());
+
+
+// Add geolocate control to the map.
+map.addControl(
+    new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+// When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+// Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true
+    })
+);
