@@ -1,5 +1,6 @@
 @use "Reset";
 @use "Mixins";
+@use "MediaQueries";
 .content-wrapper {
   display: flex;
   border:4px solid black;
@@ -12,6 +13,8 @@
    }
   & .data-container{
     display: flex;
+    margin: 20px;
+    padding: 20px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -35,9 +38,10 @@
    & .position-container{
      display: flex;
      border: 2px solid blue;
-     width: 40%;
+     width: 50%;
      height: 80%;
      margin-right: 20px;
+
     &__tittle{
       @include Mixins.centerTittle
     }
@@ -46,11 +50,21 @@
     display: flex;
     border: 2px solid green;
     width: 50%;
-    height: 70%;
-    margin-right: 20px;
+    height: 80%;
+
     &__tittle{
       @include Mixins.centerTittle
     }
 
   }
+}
+
+.col {
+  flex-basis: 40%;
+}
+
+.not-supported {
+
+  display: none;
+
 }
